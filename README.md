@@ -93,10 +93,10 @@ Step 5: Run project
 
 encryptedKey.js file need 2 environment variables, we will pass 2 parameter through command
 ```
-PRIVATE_KEY=0x78a73b581eab3c124e91000a549b259a2727183cd3d4f13de48739e4893097fa PRIVATE_KEY_PASSWORD=password node encyptedKey.js
+PRIVATE_KEY=0x78a73b581eab3c124e91000a549b259a2727183cd3d4f13de48739e4893097fa PRIVATE_KEY_PASSWORD=password node js/encyptedKey.js
 ```
 
 Run file deploy.js, PRIVATE_KEY_PASSWORD in deploy.js must be duplicate with PRIVATE_KEY_PASSWORD in encryptedKey.js
 ```
-RPC_URL=http://127.0.0.1:7545 PRIVATE_KEY_PASSWORD=password node deploy.js
+RPC_URL=http://127.0.0.1:7545 PRIVATE_KEY_PASSWORD=password node js/deploy.js
 ```
