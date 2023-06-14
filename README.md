@@ -77,7 +77,7 @@ Step 2. Set command in step 1 with "compile" command in package.json (add comman
 
 Step 3. Modify version ethers and reinstall node_modules
 
-Because "process.env" only active in version 5.4 of "ethers" sp we will change from latest version to 5.4.0
+Because "process.env" only active in version 5.4 of "ethers" so we will change from latest version to 5.4.0
 
 Modify version of ethers in package.json
 ```
@@ -91,12 +91,14 @@ npm install
 
 Step 5: Run project
 
-encryptedKey.js file need 2 environment variables, we will pass 2 parameter through command
+Both PRIVATE_KEY, RPC_URL and PRIVATE_KEY_PASSWORD are environment variables
+
+Run file encryptedKey.js in folder encryption to get encrypted key
 ```
-PRIVATE_KEY=0x78a73b581eab3c124e91000a549b259a2727183cd3d4f13de48739e4893097fa PRIVATE_KEY_PASSWORD=password node js/encyptedKey.js
+PRIVATE_KEY=private_key PRIVATE_KEY_PASSWORD=password node encryptedKey.js
 ```
 
-Run file deploy.js, PRIVATE_KEY_PASSWORD in deploy.js must be duplicate with PRIVATE_KEY_PASSWORD in encryptedKey.js
+Run file deploy.js
 ```
 RPC_URL=http://127.0.0.1:7545 PRIVATE_KEY_PASSWORD=password node js/deploy.js
 ```
