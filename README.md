@@ -100,5 +100,5 @@ PRIVATE_KEY=private_key PRIVATE_KEY_PASSWORD=password node encryptedKey.js
 
 Run file deploy.js
 ```
-RPC_URL=http://127.0.0.1:7545 PRIVATE_KEY_PASSWORD=password node js/deploy.js
+RPC_URL=http://127.0.0.1:7545 PRIVATE_KEY_PASSWORD=password node deploy.js
 ```
