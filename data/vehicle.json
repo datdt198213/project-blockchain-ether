@@ -1,0 +1,310 @@
+{
+    "fcd-export": {
+        "xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance",
+        "xsi:noNamespaceSchemaLocation": "http://sumo.dlr.de/xsd/fcd_file.xsd",
+        "timestep": [
+            {
+                "time": "0.00",
+                "vehicle": {
+                    "id": "0",
+                    "x": "1529.39",
+                    "y": "647.66",
+                    "angle": "6.44",
+                    "type": "DEFAULT_VEHTYPE",
+                    "speed": "0.00",
+                    "pos": "5.10",
+                    "lane": "38136736#5_0",
+                    "slope": "0.00"
+                }
+            },
+            {
+                "time": "0.10",
+                "vehicle": {
+                    "id": "0",
+                    "x": "1529.39",
+                    "y": "647.68",
+                    "angle": "6.44",
+                    "type": "DEFAULT_VEHTYPE",
+                    "speed": "0.25",
+                    "pos": "5.13",
+                    "lane": "38136736#5_0",
+                    "slope": "0.00"
+                }
+            },
+            {
+                "time": "0.20",
+                "vehicle": {
+                    "id": "0",
+                    "x": "1529.40",
+                    "y": "647.73",
+                    "angle": "6.44",
+                    "type": "DEFAULT_VEHTYPE",
+                    "speed": "0.51",
+                    "pos": "5.18",
+                    "lane": "38136736#5_0",
+                    "slope": "0.00"
+                }
+            },
+            {
+                "time": "0.30",
+                "vehicle": {
+                    "id": "0",
+                    "x": "1529.41",
+                    "y": "647.81",
+                    "angle": "6.44",
+                    "type": "DEFAULT_VEHTYPE",
+                    "speed": "0.74",
+                    "pos": "5.25",
+                    "lane": "38136736#5_0",
+                    "slope": "0.00"
+                }
+            },
+            {
+                "time": "0.40",
+                "vehicle": {
+                    "id": "0",
+                    "x": "1529.42",
+                    "y": "647.91",
+                    "angle": "6.44",
+                    "type": "DEFAULT_VEHTYPE",
+                    "speed": "0.98",
+                    "pos": "5.35",
+                    "lane": "38136736#5_0",
+                    "slope": "0.00"
+                }
+            },
+            {
+                "time": "0.50",
+                "vehicle": {
+                    "id": "0",
+                    "x": "1529.43",
+                    "y": "648.03",
+                    "angle": "6.44",
+                    "type": "DEFAULT_VEHTYPE",
+                    "speed": "1.23",
+                    "pos": "5.47",
+                    "lane": "38136736#5_0",
+                    "slope": "0.00"
+                }
+            },
+            {
+                "time": "0.60",
+                "vehicle": {
+                    "id": "0",
+                    "x": "1529.45",
+                    "y": "648.17",
+                    "angle": "6.44",
+                    "type": "DEFAULT_VEHTYPE",
+                    "speed": "1.43",
+                    "pos": "5.61",
+                    "lane": "38136736#5_0",
+                    "slope": "0.00"
+                }
+            },
+            {
+                "time": "0.70",
+                "vehicle": {
+                    "id": "0",
+                    "x": "1529.47",
+                    "y": "648.33",
+                    "angle": "6.44",
+                    "type": "DEFAULT_VEHTYPE",
+                    "speed": "1.65",
+                    "pos": "5.78",
+                    "lane": "38136736#5_0",
+                    "slope": "0.00"
+                }
+            },
+            {
+                "time": "0.80",
+                "vehicle": {
+                    "id": "0",
+                    "x": "1529.49",
+                    "y": "648.52",
+                    "angle": "6.44",
+                    "type": "DEFAULT_VEHTYPE",
+                    "speed": "1.83",
+                    "pos": "5.96",
+                    "lane": "38136736#5_0",
+                    "slope": "0.00"
+                }
+            },
+            {
+                "time": "0.90",
+                "vehicle": {
+                    "id": "0",
+                    "x": "1529.51",
+                    "y": "648.72",
+                    "angle": "6.44",
+                    "type": "DEFAULT_VEHTYPE",
+                    "speed": "2.01",
+                    "pos": "6.16",
+                    "lane": "38136736#5_0",
+                    "slope": "0.00"
+                }
+            },
+            {
+                "time": "1.00",
+                "vehicle": [
+                    {
+                        "id": "0",
+                        "x": "1529.54",
+                        "y": "648.94",
+                        "angle": "6.44",
+                        "type": "DEFAULT_VEHTYPE",
+                        "speed": "2.24",
+                        "pos": "6.39",
+                        "lane": "38136736#5_0",
+                        "slope": "0.00"
+                    },
+                    {
+                        "id": "1",
+                        "x": "547.87",
+                        "y": "1409.36",
+                        "angle": "0.00",
+                        "type": "DEFAULT_VEHTYPE",
+                        "speed": "0.00",
+                        "pos": "5.10",
+                        "lane": "-601529284#1_0",
+                        "slope": "0.00"
+                    }
+                ]
+            },
+            {
+                "time": "1.10",
+                "vehicle": [
+                    {
+                        "id": "0",
+                        "x": "1529.56",
+                        "y": "649.18",
+                        "angle": "6.44",
+                        "type": "DEFAULT_VEHTYPE",
+                        "speed": "2.39",
+                        "pos": "6.63",
+                        "lane": "38136736#5_0",
+                        "slope": "0.00"
+                    },
+                    {
+                        "id": "1",
+                        "x": "547.87",
+                        "y": "1409.39",
+                        "angle": "0.00",
+                        "type": "DEFAULT_VEHTYPE",
+                        "speed": "0.26",
+                        "pos": "5.13",
+                        "lane": "-601529284#1_0",
+                        "slope": "0.00"
+                    }
+                ]
+            },
+            {
+                "time": "1.20",
+                "vehicle": [
+                    {
+                        "id": "0",
+                        "x": "1529.59",
+                        "y": "649.44",
+                        "angle": "6.44",
+                        "type": "DEFAULT_VEHTYPE",
+                        "speed": "2.60",
+                        "pos": "6.89",
+                        "lane": "38136736#5_0",
+                        "slope": "0.00"
+                    },
+                    {
+                        "id": "1",
+                        "x": "547.87",
+                        "y": "1409.43",
+                        "angle": "0.00",
+                        "type": "DEFAULT_VEHTYPE",
+                        "speed": "0.49",
+                        "pos": "5.17",
+                        "lane": "-601529284#1_0",
+                        "slope": "0.00"
+                    }
+                ]
+            },
+            {
+                "time": "1.30",
+                "vehicle": [
+                    {
+                        "id": "0",
+                        "x": "1529.62",
+                        "y": "649.71",
+                        "angle": "6.44",
+                        "type": "DEFAULT_VEHTYPE",
+                        "speed": "2.78",
+                        "pos": "7.17",
+                        "lane": "38136736#5_0",
+                        "slope": "0.00"
+                    },
+                    {
+                        "id": "1",
+                        "x": "547.87",
+                        "y": "1409.51",
+                        "angle": "0.00",
+                        "type": "DEFAULT_VEHTYPE",
+                        "speed": "0.72",
+                        "pos": "5.25",
+                        "lane": "-601529284#1_0",
+                        "slope": "0.00"
+                    }
+                ]
+            },
+            {
+                "time": "1.40",
+                "vehicle": [
+                    {
+                        "id": "0",
+                        "x": "1529.66",
+                        "y": "650.01",
+                        "angle": "6.44",
+                        "type": "DEFAULT_VEHTYPE",
+                        "speed": "2.96",
+                        "pos": "7.46",
+                        "lane": "38136736#5_0",
+                        "slope": "0.00"
+                    },
+                    {
+                        "id": "1",
+                        "x": "547.87",
+                        "y": "1409.60",
+                        "angle": "0.00",
+                        "type": "DEFAULT_VEHTYPE",
+                        "speed": "0.94",
+                        "pos": "5.34",
+                        "lane": "-601529284#1_0",
+                        "slope": "0.00"
+                    }
+                ]
+            },
+            {
+                "time": "1.50",
+                "vehicle": [
+                    {
+                        "id": "0",
+                        "x": "1529.69",
+                        "y": "650.32",
+                        "angle": "6.44",
+                        "type": "DEFAULT_VEHTYPE",
+                        "speed": "3.18",
+                        "pos": "7.78",
+                        "lane": "38136736#5_0",
+                        "slope": "0.00"
+                    },
+                    {
+                        "id": "1",
+                        "x": "547.87",
+                        "y": "1409.72",
+                        "angle": "0.00",
+                        "type": "DEFAULT_VEHTYPE",
+                        "speed": "1.17",
+                        "pos": "5.46",
+                        "lane": "-601529284#1_0",
+                        "slope": "0.00"
+                    }
+                ]
+            }
+        ]
+    }
+}
