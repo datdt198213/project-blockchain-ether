@@ -1,21 +1,32 @@
-const crypto = require('node:crypto');
-const dataJson = require('../data/vehicle.json')
+const crypto = require("node:crypto");
+const dataJson = require("../data/vehicle.json");
+const maxTime = require("process");
+const endTime = parseFloat(maxTime.argv[2])
 
-// Define driver class 
+// Define driver class
 class Driver {
-    constructor(id, distance, time, coin) { 
+    constructor(id, distance, time, coin) {
         this.id = id;
-        this.distance = Number (distance);
-        this.time = Number (time);
-        this.coin = Number (coin);
+        this.distance = Number(distance);
+        this.time = Number(time);
+        this.coin = Number(coin);
     }
 
     display() {
-        console.log("id: " + this.id + ", Distance: " + this.distance + ", Time: " + this.time + " , Coin: " + this.coin);
+        console.log(
+            "id: " +
+                this.id +
+                ", Distance: " +
+                this.distance +
+                ", Time: " +
+                this.time +
+                " , Coin: " +
+                this.coin
+        );
     }
 }
 
-// Define vehicle class 
+// Define vehicle class
 class Vehicle {
     constructor(vehicle, time) {
         this.id = vehicle.id;
@@ -27,13 +38,44 @@ class Vehicle {
         this.pos = vehicle.pos;
         this.lane = vehicle.lane;
         this.slope = vehicle.slope;
-        this.time = time;
+        this.time = Number (time);
     }
 }
 
-// Hash string by sha512 
+// Hash string by sha512
 function sha512(inputString) {
-    return crypto.createHash('sha512').update(inputString).digest('hex');
+    return crypto.createHash("sha512").update(inputString).digest("hex");
+}
+
+function getFistElement(drivers) {
+    return drivers.map((subarray) => subarray[0]);
+}
+
+// Get data from json and return list of vehicle in a period of time
+function getDataFromJson(begin, end) {
+    const data = dataJson["fcd-export"]["timestep"];
+
+    dataList = [];
+
+    data.forEach((element) => {
+        time = Number(element.time);
+        if (time >= begin && time <= end) {
+            // Having a object
+            if (element.vehicle.length == undefined) {
+                // Push data to list
+                dataList.push(new Vehicle(element.vehicle, element.time));
+            }
+            // Having object list
+            else {
+                // Push data to list
+                element.vehicle.forEach((v) => {
+                    dataList.push(new Vehicle(v, element.time));
+                });
+            }
+        }
+    });
+
+    return dataList;
 }
 
 // Classify data of a node, return new array is classified
@@ -42,7 +84,7 @@ function classifyList(drivers) {
 
     check = [];
 
-    for (let i = 0 ; i < drivers.length;i++) {
+    for (let i = 0; i < drivers.length; i++) {
         check.push(false);
     }
 
@@ -57,181 +99,108 @@ function classifyList(drivers) {
                     check[j] = true;
                 }
             }
-            newDrivers.push(list);
+            list.forEach((l) => newDrivers.push(l));
         }
     }
 
     return newDrivers;
 }
 
-// Calculate average coin in blockchain network
-function calculateAverageCoin(coins) {
-    w = 0;
-    for (let i = 0; i < coins.length; i++) {
-        w += coins[i];
-    }
-
-    w /= coins.length;
-    return w;
-}
-
-// Calculate coin of a driver through distance
-function calculateCoinDriver(drivers, distance, begin, end) {
-    n = drivers.length;
-    temp = 0;
-
-    // Drivers of a class, only belong node 0, node 1, ...
-    for (let i = begin; i <= end; i = i + 0.1) {
-        // When plus 0.1, it will overflow number after point
-        currentTime = parseFloat(i.toFixed(1));
-        for (let j = 0; j < n; j++) {
-            if (drivers[j].time == currentTime) {
-                temp = (temp + drivers[j].distance);
-                if (temp >= distance) {
-                    drivers[j].coin++;
-                    temp -= distance;
-                }
-                break;
-            }
-        }
-    }
-    
-    totalCoins = 0;
-    for (let i = 0; i < n; i++) {
-        totalCoins += drivers[i].coin;
-    }
-
-    return totalCoins;
-}
-
-// Get last of element in a array node at current time (array of node 1, array of node 2)
-function getLastElememt(drivers) {
-    return drivers.map(subarray => subarray[subarray.length - 1]);
-}
-
-function getFistElement(drivers) {
-    return drivers.map(subarray => subarray[0]);
-}
-
-// Return satisfy node proof of driving
-function rule(drivers, coins, w) {
-    nodePod = [];
-
-    //  Get hash value of w
-    let hashW = sha512(w.toString());
-
-    for (let i = 0; i < coins.length; i++) {
-        //  Get hash value of driver
-        hashCurrent = sha512(coins[i].toString());
-        // if (hashCurrent <= hashW) {
-        //     nodePod.push(drivers[i]);
-        // }
-        if (hashCurrent.localeCompare(hashW) <= 0) {
-            nodePod.push(drivers[i]);
-        } 
-    }
-        
-    return nodePod;
-}
-
-// Get data from json and return list of vehicle
-function getDataFromJson() {
-    const data = dataJson['fcd-export']['timestep']; 
-
-    dataList = [];
-
-    data.forEach(element => {
-
-        // Having a object
-        if (element.vehicle.length == undefined) {
-            // Push data to list
-            dataList.push(new Vehicle(element.vehicle, element.time));
-        } else {
-            vehicles = element.vehicle;
-            // Having more than one object
-            vehicles.forEach( v => {
-                // Push data to list
-                dataList.push(new Vehicle(v, element.time));
-            })
-        }
-    });
-
-    return dataList;
-}
-
-// Check object exist in array
-function containsObject(obj, list) {
-    var i;
-    for (i = 0; i < list.length; i++) {
-        if (list[i] === obj) {
-            return true;
-        }
-    }
-
-    return false;
-}
-
-// Calculate distance at 2 points
-function calculateDistance(a, b) {
-    return Math.sqrt((a.x - b.x) ** 2 + (a.y - b.y) ** 2);
-}
-
 // Calculate distance of a vehicle list, return a driver list
-function calculateDistanceList(vehicles) {
+function calculateDistanceList(vehicles, distance, end) {
     drivers = [];
 
-    d = new Driver(vehicles[0].id, 0, vehicles[0].time, 0);
-    drivers.push(d);
+    d = 0;
+    c = 0;
+    for (let idx = 1; idx < vehicles.length; idx++) {
+        if (vehicles[idx].id === vehicles[idx - 1].id) {
+            timestep = vehicles[idx].time - vehicles[idx - 1].time;
+            roundTime = parseFloat(timestep.toFixed(1));
 
-    for (let i = 1; i < vehicles.length; i++) {
-        timestep = vehicles[i].time - vehicles[i - 1].time;
-        roundTime = parseFloat(timestep.toFixed(1));
-        if (roundTime === 0.10) {
-            distance = calculateDistance(vehicles[i], vehicles[i-1]);
-            d = new Driver(vehicles[i].id, distance, vehicles[i].time, 0);
-            drivers.push(d);
+            if (roundTime === 0.1) {
+                d += Math.sqrt((vehicles[idx].x - vehicles[idx - 1].x) ** 2 + (vehicles[idx].y - vehicles[idx-1].y) ** 2);
+
+                if (d >= distance) {
+                    c = c + parseInt(d / distance);
+                    d = d % distance;
+                }
+            }
+        }
+
+        if (vehicles[idx].time === end) {
+            const dr = new Driver(vehicles[idx].id, d, end, c);
+            drivers.push(dr);
+
+            d = 0;
+            c = 0;
         }
     }
 
     return drivers;
 }
 
+// Return satisfy node proof of driving
+function rule(drivers) {
+    nodePod = [];
 
+    w = 0;
+    drivers.forEach(d => {
+        w += d.coin;
+    })
 
-function main () {
-    coins = [];
+    w = w / drivers.length;
 
-    dataList = getDataFromJson();
+    //  Get hash value of w
+    let hashW = sha512(w.toString());
 
-    dataList = classifyList(dataList);
+    for (let i = 0; i < drivers.length; i++) {
+        //  Get hash value of driver
+        hashCurrent = sha512(drivers[i].coin.toString());
 
-    newList = []
-    for(let i = 0; i < dataList.length; i++) {
-        // console.log(dataList[i]);
-        a = calculateDistanceList(dataList[i]);
-        newList.push(a);
+        if (hashCurrent.localeCompare(hashW) <= 0) {
+            nodePod.push(drivers[i]);
+        }
     }
 
-    for (let i = 0; i < newList.length; i++) {
-        w = calculateCoinDriver(newList[i], 0.1, 0.0, 1.0);
-        coins.push(w);
-    }
-
-    w = calculateAverageCoin(coins);
-
-    // Get all last elements from classify driver list
-    lastElememts = getLastElememt(newList);
-
-    nPOD = rule(lastElememts, coins, w);
-
-    nPOD.forEach(element => {
-        console.log(element)
-    });
+    return nodePod;
 }
 
-main();
+function main() {
+    let begin = 0;
+    let end = 2;
+    let t = end - begin;
+    let distance = 0.1;
+    const count = Math.ceil(endTime / t);
 
-module.exports =  {
-    calculateAverageCoin, 
-    rule
-} 
+    const output = [];
+
+    for (let i = 0; i < count; i++) {
+        let coins = [];
+
+        const inputData = getDataFromJson(begin, end);
+
+        const classList = classifyList(inputData);
+
+        const distanceList = calculateDistanceList(classList, distance, end);
+        
+        const nPOD = rule(distanceList);
+
+        nPOD.forEach((v) => {
+            output.push(v);
+        });
+
+        begin += t;
+        end += t;
+        if (end > endTime) end = endTime;
+    }
+
+    output.forEach((v) => console.log(v));
+}
+const start = Date.now();
+main();
+const end = Date.now();
+console.log(`Execution time: ${end - start} ms`);
+
+module.exports = {
+    rule,
+};
